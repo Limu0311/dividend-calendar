@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 미국 주식 배당계산기</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+<div class="container">
+  <div class="tab-menu">
+     <div class="slider" id="slider"></div>
+     <button onclick="showCalc('dividend')">미국 배당 계산기</button>
+     <button onclick="showCalc('target')">월 목표 배당 계산기</button>
+   </div>
+
+
+ <div id="dividendCalc">
+  
+ <div class="top-bar">미국 주식 배당계산기</div>
+
+    
+ <form action="">
+  <div class="input-row">
+    <label>보유주식 수</label>
+
+     <div class="input-wrapper">
+          <input type="number" id="shares" min="0" required
+          oninvalid="this.setCustomValidity('0보다 큰 수를 입력해주세요')"
+          oninput="this.setCustomValidity('')"
+          placeholder="보유 수 입력">
+     </div>
+  </div>
+ </form>
+
+
+ <form action="">
+  <div class="input-row">
+    <label>한 주 배당금액</label>
+
+     <div class="input-wrapper">
+         <span class="unit">$</span> 
+          <input type="number" id="dividendPerShare" min="0" required 
+          oninvalid="this.setCustomValidity('0보다 큰 수를 입력해주세요')"
+          oninput="this.setCustomValidity('')"
+          placeholder="금액을 입력">
+           
+     </div>
+  </div>
+ </form> 
+
+
+ <div class="input-row">
+  <label>배당주기</label>
+
+     <div class="input-wrapper">
+          <select id="dividendFreq" name="dividendFreq" required>
+             <placeholder="분기선택">
+             <option value=""selected disabled hidden>선택</option>
+             <option value="1">연배당</option>
+             <option value="2">반기배당</option>
+             <option value="4">분기배당</option>
+             <option value="12">월배당</option>
+             
+             </select>
+     </div>
+  </div>
+
+
+  <button onclick="calculateDividend()">계산하기</button>
+
+
+  <div class="input-row" id="resultBox" hidden>
+  <label>연간 총 배당금</label>
+
+  <div class="money-input">
+    <span class="currency">$</span>
+    <input type="text" id="totalDividend" readonly> </div>
+</div>
+
+
+</div>
+
+
+
+
+ <div id="targetCalc" hidden>
+
+
+
+ <div class="top-bar"> 목표 월 배당 계산기</div>
+
+<div>
+<label>목표 월 배당 금액</label>
+
+<div class="money-input">
+<span class="currency">$</span>
+<input id="targetAmount" type="number" min="1" placeholder="금액을 입력"
+oninput="this.setCustomValidity('0보다 큰 수를 입력해주세요')" required>
+</div>
+</div>
+
+
+<div>
+<label>주당 배당금</label>
+
+<div class="money-input">
+<span class="currency">$</span>
+<input id="targetDividendPerShare" type="number" step="0.01" placeholder="금액을 입력">
+</div>
+</div>
+
+
+<div>
+<label>현재 보유주식의 배당분기</label>
+<select id="targetDividendFreq">
+<option value="1">연 1회</option>
+<option value="2">반기</option>
+<option value="4">분기</option>
+<option value="12">월</option>
+</select>
+</div>
+
+<button onclick="calculateShares()">계산</button>
+
+<p id="result"></p>
+
+</div>
+</div>
+</div>
+
+
+<!-- 물음표 툴 바 -->
+<div class="calendar-header">
+  <div class="calendar-container">   
+      <div class="tooltip">
+        <span class="question-mark">?</span>
+        <span class="tooltip-text">
+          배당락: 주주가 배당을 받기 위해 주식을 사야 하는 마지막 날
+        </span>
+      </div>
+    </div>
+
+    </div>
+</div>
+
+
+
+
+<div class="calendar-container">
+  <div class="calendar-card">
+  <h3>배당 캘린더</h3>
+  <span id="monthYear">2026년 3월</span>
+  <div class="calendar-header">
+    
+    <button id="prevMonth">&lt;</button>
+    
+    <button id="nextMonth">&gt;</button>
+  </div>
+  <div class="calendar-grid" id="calendarGrid">
+    <!-- 요일 -->
+    <div class="day-name">일</div>
+    <div class="day-name">월</div>
+    <div class="day-name">화</div>
+    <div class="day-name">수</div>
+    <div class="day-name">목</div>
+    <div class="day-name">금</div>
+    <div class="day-name">토</div>
+    <!-- 날짜는 JS에서 삽입 -->
+  </div>
+ </div>
+</div>
+
+
+<div class="feedback-button" onclick="toggleFeedback()">💬</div>
+
+<div class="feedback-box" id="feedbackBox">
+
+<div class="feedback-header">
+피드백 보내기
+<span onclick="toggleFeedback()">✕</span>
+</div>
+
+<input type="email" id="feedbackEmail" placeholder="이메일 (선택)">
+
+<textarea id="feedbackMessage" placeholder="문의나 개선 아이디어를 적어주세요"></textarea>
+
+<button onclick="sendFeedback()">보내기</button>
+
+</div>
+
+
+<script src="script.js"></script>
+</body>
+</html> 
+
+
+
+
+
+
+

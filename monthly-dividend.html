@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>목표 배당 계산기</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ 
+<div class="container">
+<div class="top-bar"> 목표 월 배당 계산기</div>
+
+<div>
+<label>목표 월 배당 금액</label>
+
+<div class="money-input">
+    <span class="currency">$</span>
+<input id="targetAmount" type="number" min="1" placeholder="금액을 입력"
+oninput="this.setCustomValidity('0보다 큰 수를 입력해주세요')"
+required>
+
+  </div>
+</div>
+
+<div>
+<label>주당 배당금</label>
+
+<div class="money-input">
+    <span class="currency">$</span>
+<input id="dividendPerShare" type="number" step="0.01" placeholder="금액을 입력">
+
+  </div>
+</div>
+
+<div>
+<label>현재 보유주식의 배당분기</label>
+<select id="dividendFreq">
+<option value="1">연 1회</option>
+<option value="2">반기</option>
+<option value="4">분기</option>
+<option value="12">월</option>
+</select>
+</div>
+
+<button onclick="calculateShares()">계산</button>
+
+<p id="result"></p>
+
+<script src="script.js"></script>
+
+
+
+<button onclick="location.href='index.html'">미국 주식 배당계산기</button>
+
+
+</div>
+</body>
+</html>
